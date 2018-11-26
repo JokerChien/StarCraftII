@@ -23,6 +23,38 @@ Loop %HERO_COUNT%
 	Hero_Name_%A_Index%:=ARRAY3
 }
 
+dichotomy_1:=	0.5
+dichotomy_2:=	0.1	;0.25
+dichotomy_3:=	0.9	;0.75
+dichotomy_4:=	0.375
+dichotomy_5:=	0.875
+dichotomy_6:=	0.625
+dichotomy_7:=	0.125
+dichotomy_8:=	0.1875
+dichotomy_9:=	0.8125
+dichotomy_10:=	0.3125
+dichotomy_11:=	0.6875
+dichotomy_12:=	0.4375
+dichotomy_13:=	0.0625
+dichotomy_14:=	0.5625
+dichotomy_15:=	0.9375
+dichotomy_16:=	0.03125
+dichotomy_17:=	0.53125
+dichotomy_18:=	0.09375
+dichotomy_19:=	0.59375
+dichotomy_20:=	0.15625
+dichotomy_21:=	0.65625
+dichotomy_22:=	0.21875
+dichotomy_23:=	0.71875
+dichotomy_24:=	0.28125
+dichotomy_25:=	0.78125
+dichotomy_26:=	0.34375
+dichotomy_27:=	0.84375
+dichotomy_28:=	0.40625
+dichotomy_29:=	0.90625
+dichotomy_30:=	0.46875
+dichotomy_31:=	0.96875
+
 ;===================================================
 ;=                   全局变量初始化                =
 ;===================================================
@@ -38,6 +70,72 @@ SwiShot_6:="!^{l}"
 SwiShot_7:="!^{;}"
 SwiShot_8:="!^{9}"
 
+;小地图：左上角28,787 右下角 284,1034 克隆点 576,888 中心点 156,910
+BackSpace::
+n_dichotomy:=1
+MouseGetPos mapX,mapY
+SetTimer SpyTeam,33
+KeyWait BackSpace,Up
+SetTimer SpyTeam,Off
+Return
+
+SpyTeam:
+if(mapX>284 or mapX<28 or mapY>1034 or mapY<787){
+;~ 	ToolTip
+	Return
+}
+;~ ToolTip "aaaa",28,787
+
+;~ a:=dichotomy_%n_dichotomy%
+;~ ToolTip %mapX%`n%mapY%`n%a%,28,787
+if(mapX<156 and mapY<910){
+	x1:=28+mapX-28+mapY-787
+	y1:=787
+	x2:=28
+	y2:=787+mapY-787+mapX-28
+
+	clickX:=(x1-x2)*dichotomy_%n_dichotomy%+x2
+	clickY:=(y1-y2)*dichotomy_%n_dichotomy%+y2
+}else if(mapX>=156 and mapY>=910){
+	x1:=284
+	y1:=1034-(1034-mapY)-(284-mapX)
+	x2:=284-(284-mapX)-(1034-mapY)
+	y2:=1034
+
+	clickX:=(x1-x2)*dichotomy_%n_dichotomy%+x2
+	clickY:=(y1-y2)*dichotomy_%n_dichotomy%+y2
+}else if(mapX>=156 and mapY<910){
+	x1:=284
+	y1:=787+mapY-787+284-mapX
+	x2:=284-(284-mapX)-(mapY-787)
+	y2:=787
+
+	clickX:=(x1-x2)*dichotomy_%n_dichotomy%+x2
+	clickY:=(y1-y2)*dichotomy_%n_dichotomy%+y2
+}else if(mapX<156 and mapY>=910){
+	x1:=28+mapX-28+1034-mapY
+	y1:=1034
+	x2:=28
+	y2:=1034-(1034-mapY)-(mapX-28)
+
+	clickX:=(x1-x2)*dichotomy_%n_dichotomy%+x2
+	clickY:=(y1-y2)*dichotomy_%n_dichotomy%+y2
+}
+
+
+n_dichotomy++
+n_dichotomy:=(n_dichotomy>31) ? 1 : n_dichotomy
+;~ ToolTip %clickX%`n%clickY%`n%n_dichotomy%,28,787
+;~ Click %clickX%,%clickY%,Right
+MouseMove %clickX%,%clickY%
+send {=}{LButton}
+MouseMove 576,888
+send +{lbutton}
+Return
+
+\::
+send {]}{[}{p}{;}
+Return
 
 ~!p::
 send {alt ctrl}
