@@ -194,56 +194,56 @@ Return
 
 ~1::
 ~!p::
-send {alt ctrl}
+;~ send {alt ctrl}
 N_Base:=1
 send ^{o}
 Return
 
 ~2::
 ~!o::
-send {alt ctrl}
+;~ send {alt ctrl}
 N_Base:=2
 send ^{o}
 Return
 
 ~3::
 ~!i::
-send {alt ctrl}
+;~ send {alt ctrl}
 N_Base:=3
 send ^{o}
 Return
 
 ~4::
 ~!j::
-send {alt ctrl}
+;~ send {alt ctrl}
 N_Base:=4
 send ^{o}
 Return
 
 ~r::
 ~!k::
-send {alt ctrl}
+;~ send {alt ctrl}
 N_Base:=5
 send ^{o}
 Return
 
 ~e::
 ~!l::
-send {alt ctrl}
+;~ send {alt ctrl}
 N_Base:=6
 send ^{o}
 Return
 
 ~w::
 ~!;::
-send {alt ctrl}
+;~ send {alt ctrl}
 N_Base:=7
 send ^{o}
 Return
 
 ~q::
 ~!9::
-send {alt ctrl}
+;~ send {alt ctrl}
 N_Base:=8
 send ^{o}
 Return
